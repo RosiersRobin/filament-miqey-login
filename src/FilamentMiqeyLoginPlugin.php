@@ -1,15 +1,15 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace RosiersRobin\FilamentMiqeyLogin;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class SkeletonPlugin implements Plugin
+class FilamentMiqeyLoginPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'skeleton';
+        return 'filament-miqey-login';
     }
 
     public function register(Panel $panel): void
