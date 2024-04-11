@@ -10,11 +10,11 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
+use RosiersRobin\FilamentMiqeyLogin\Commands\FilamentMiqeyLoginCommand;
+use RosiersRobin\FilamentMiqeyLogin\Testing\TestsFilamentMiqeyLogin;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use RosiersRobin\FilamentMiqeyLogin\Commands\FilamentMiqeyLoginCommand;
-use RosiersRobin\FilamentMiqeyLogin\Testing\TestsFilamentMiqeyLogin;
 
 class FilamentMiqeyLoginServiceProvider extends PackageServiceProvider
 {

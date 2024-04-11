@@ -1,7 +1,7 @@
 <?php
 
 namespace RosiersRobin\FilamentMiqeyLogin\Pages\Auth;
-use Filament\Forms\Form;
+
 use Filament\Pages\Auth\Login as BaseAuth;
 
 class SmsLogin extends BaseAuth
