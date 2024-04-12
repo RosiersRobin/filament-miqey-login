@@ -6,8 +6,10 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/rosiersrobin/filament-miqey-login.svg?style=flat-square)](https://packagist.org/packages/rosiersrobin/filament-miqey-login)
 
 
+Add support for MiQey login flows to your Filament PHP project.
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+This package requires a valid MiQey Account and Pusher to work.
+You also need to have Queues setup.
 
 ## Installation
 
@@ -17,38 +19,69 @@ You can install the package via composer:
 composer require rosiersrobin/filament-miqey-login
 ```
 
-You can publish and run the migrations with:
+[//]: # ()
+[//]: # (You can publish and run the migrations with:)
 
-```bash
-php artisan vendor:publish --tag="filament-miqey-login-migrations"
-php artisan migrate
-```
+[//]: # ()
+[//]: # (```bash)
 
-You can publish the config file with:
+[//]: # (php artisan vendor:publish --tag="filament-miqey-login-migrations")
 
-```bash
-php artisan vendor:publish --tag="filament-miqey-login-config"
-```
+[//]: # (php artisan migrate)
 
-Optionally, you can publish the views using
+[//]: # (```)
 
-```bash
-php artisan vendor:publish --tag="filament-miqey-login-views"
-```
+[//]: # (You can publish the config file with:)
 
-This is the contents of the published config file:
+[//]: # ()
+[//]: # (```bash)
 
-```php
-return [
-];
-```
+[//]: # (php artisan vendor:publish --tag="filament-miqey-login-config")
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (Optionally, you can publish the views using)
+
+[//]: # ()
+[//]: # (```bash)
+
+[//]: # (php artisan vendor:publish --tag="filament-miqey-login-views")
+
+[//]: # (```)
+
+[//]: # (This is the contents of the published config file:)
+
+[//]: # ()
+[//]: # (```php)
+
+[//]: # (return [)
+
+[//]: # (];)
+
+[//]: # (```)
 
 ## Usage
 
+Change the `login()` function in your panel provider you want the login to be active on.
+
 ```php
-$filamentMiqeyLogin = new RosiersRobin\FilamentMiqeyLogin();
-echo $filamentMiqeyLogin->echoPhrase('Hello, RosiersRobin!');
+use RosiersRobin\FilamentMiqeyLogin\Pages\Auth\SmsLogin;
+
+
+public function panel(Panel $panel): Panel
+    {
+        return $panel
+        ...
+        ->login(SmsLogin::class);
+    }
 ```
+
+Add an .env key called `SECURE_ID_API_KEY=` with the key given by MiQey.
+
+Make sure you have pusher setup and working.
+
+**Currently, this package uses the default queue to handle the webhooks received. Make sure you have a working queue setup that is NOT sync.**
 
 ## Testing
 
@@ -70,7 +103,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Robin](https://github.com/RosiersRobin)
+- [Robin Rosiers](https://github.com/RosiersRobin)
 - [All Contributors](../../contributors)
 
 ## License
