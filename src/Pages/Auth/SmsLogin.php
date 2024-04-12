@@ -22,6 +22,7 @@ class SmsLogin extends BaseAuth
 
         // render QR code :D
         $signService = new SignAgentService();
+
         try {
             $signService->getSign();
         } catch (\Throwable $exception) {
@@ -41,7 +42,7 @@ class SmsLogin extends BaseAuth
 
         $response = Http::post('https://secureid.digitalhq.com/api/generate', [
             'api_key' => config('secure-id.api_key'),
-            'type' => $method
+            'type' => $method,
         ]);
 
         return json_decode($response->getBody()->getContents(), true);
@@ -49,6 +50,6 @@ class SmsLogin extends BaseAuth
 
     public function getBrowserAgent(): Agent
     {
-        return (new Agent());
+        return new Agent();
     }
 }
