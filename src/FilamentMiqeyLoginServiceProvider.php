@@ -2,7 +2,7 @@
 
 namespace RosiersRobin\FilamentMiqeyLogin;
 
-use Filament\Support\Assets\AlpineComponent;
+use Filament\Facades\Filament;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
@@ -56,6 +56,11 @@ class FilamentMiqeyLoginServiceProvider extends PackageServiceProvider
         if (file_exists($package->basePath('/../resources/views'))) {
             $package->hasViews(static::$viewNamespace);
         }
+
+        $package->hasRoutes([
+            'web',
+            'webhook',
+        ]);
     }
 
     public function packageRegistered(): void

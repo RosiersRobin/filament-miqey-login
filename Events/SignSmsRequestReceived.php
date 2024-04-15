@@ -1,0 +1,37 @@
+<?php
+
+namespace RosiersRobin\Events;
+
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+class SignSmsRequestReceived implements ShouldBroadcastNow
+{
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
+
+    public function __construct(
+        private string $code,
+        private string $token
+    ) {
+    }
+
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return Channel|array
+     */
+    public function broadcastOn(): array
+    {
+        return ["signRequest_$this->code"];
+    }
+
+    public function broadCastAs(): string
+    {
+        return 'sign-request-received';
+    }
+}

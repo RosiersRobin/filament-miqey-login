@@ -14,17 +14,27 @@ class SmsLogin extends BaseAuth
 
     private bool $useDefaultLogin = false;
 
+    private string $qrCodeData = '';
+
+    private string $androidSmsUrl = '';
+
+    private string $iosSmsLogin = '';
+
+    private string $channelCode = '';
+
     public function mount(): void
     {
         if (Filament::auth()->check()) {
             redirect()->intended(Filament::getUrl());
         }
 
-        // render QR code :D
         $signService = new SignAgentService();
 
         try {
             $signService->getSign();
+            // render the things for the views
+            $this->setSignDataForView();
+
         } catch (\Throwable $exception) {
             $this->useDefaultLogin = true;
         }
@@ -35,7 +45,35 @@ class SmsLogin extends BaseAuth
         return $this->useDefaultLogin;
     }
 
-    public function getSecureIdLoginMethod()
+    public function getLoginQr(): string
+    {
+        return $this->qrCodeData;
+    }
+
+    public function getAndroidLoginUrl(): string
+    {
+        return $this->androidSmsUrl;
+    }
+
+    public function getIosLoginUrl(): string
+    {
+        return $this->iosSmsLogin;
+    }
+
+    public function getChannelCode(): string
+    {
+        return $this->channelCode;
+    }
+
+    public function getBrowserAgent(): Agent
+    {
+        return new Agent();
+    }
+
+    /**
+     * @throws \JsonException
+     */
+    private function setSignDataForView(): void
     {
         $agent = new Agent();
         $method = $agent->isDesktop() ? 'qr' : 'sms';
@@ -45,11 +83,18 @@ class SmsLogin extends BaseAuth
             'type' => $method,
         ]);
 
-        return json_decode($response->getBody()->getContents(), true);
-    }
+        $bodyString = $response->getBody()->getContents();
 
-    public function getBrowserAgent(): Agent
-    {
-        return new Agent();
+        if (! json_validate($bodyString)) {
+            throw new \Exception('Not a valid json');
+        }
+
+        $decoded = json_decode($bodyString, true, 512, JSON_THROW_ON_ERROR);
+
+        // set the params
+        $this->qrCodeData = data_get($decoded, 'qr');
+        $this->androidSmsUrl = data_get($decoded, 'android');
+        $this->iosSmsLogin = data_get($decoded, 'ios');
+        $this->channelCode = data_get($decoded, 'code');
     }
 }

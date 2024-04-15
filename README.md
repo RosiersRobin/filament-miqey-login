@@ -19,47 +19,11 @@ You can install the package via composer:
 composer require rosiersrobin/filament-miqey-login
 ```
 
-[//]: # ()
-[//]: # (You can publish and run the migrations with:)
+## Requirements
 
-[//]: # ()
-[//]: # (```bash)
-
-[//]: # (php artisan vendor:publish --tag="filament-miqey-login-migrations")
-
-[//]: # (php artisan migrate)
-
-[//]: # (```)
-
-[//]: # (You can publish the config file with:)
-
-[//]: # ()
-[//]: # (```bash)
-
-[//]: # (php artisan vendor:publish --tag="filament-miqey-login-config")
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (Optionally, you can publish the views using)
-
-[//]: # ()
-[//]: # (```bash)
-
-[//]: # (php artisan vendor:publish --tag="filament-miqey-login-views")
-
-[//]: # (```)
-
-[//]: # (This is the contents of the published config file:)
-
-[//]: # ()
-[//]: # (```php)
-
-[//]: # (return [)
-
-[//]: # (];)
-
-[//]: # (```)
+- Pusher (or other socket service that uses pusher protocol)
+- queue worker (not sync)
+- MiQey account with credit
 
 ## Usage
 
