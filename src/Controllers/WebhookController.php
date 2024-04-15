@@ -10,7 +10,6 @@ use RosiersRobin\events\SignSmsRequestReceived;
 
 class WebhookController
 {
-
     public function __invoke(Request $request)
     {
         $phone = $request->get('phone');
