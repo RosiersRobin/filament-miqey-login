@@ -18,7 +18,7 @@ class ValidateAuthentication
             abort(403, 'token mismatch');
         }
 
-        $phoneNumber = Cache::get($request->get('token'));
+        $phoneNumber = Cache::pull($request->get('token'));
 
         // todo: make the user model dynamic using the plugin
         $user = \App\Models\User::query()
@@ -30,7 +30,7 @@ class ValidateAuthentication
             abort(403, 'user not found');
         }
 
-        Filament::auth()->login($user);
+        Filament::auth()->login($user, true);
 
         return redirect()->to(Filament::getCurrentPanel()?->getPath());
     }
