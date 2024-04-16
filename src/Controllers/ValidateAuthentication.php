@@ -21,7 +21,7 @@ class ValidateAuthentication
         $phoneNumber = Cache::get($request->get('token'));
 
         // todo: make the user model dynamic using the plugin
-        $user = App\Models\User::query()
+        $user = \App\Models\User::query()
             ->where('phone_number', '=', $phoneNumber)
             ->first();
 

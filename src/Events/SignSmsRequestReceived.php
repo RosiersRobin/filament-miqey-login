@@ -1,6 +1,6 @@
 <?php
 
-namespace RosiersRobin\Events;
+namespace RosiersRobin\FilamentMiqeyLogin\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -15,8 +15,8 @@ class SignSmsRequestReceived implements ShouldBroadcastNow
     use SerializesModels;
 
     public function __construct(
-        private string $code,
-        private string $token
+        public string $code,
+        public string $token
     ) {
     }
 

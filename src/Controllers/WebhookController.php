@@ -3,14 +3,16 @@
 namespace RosiersRobin\FilamentMiqeyLogin\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use RosiersRobin\events\SignSmsRequestReceived;
+use RosiersRobin\FilamentMiqeyLogin\Events\SignSmsRequestReceived;
 
 class WebhookController
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): JsonResponse
     {
         $phone = $request->get('phone');
         $code = $request->get('code');
