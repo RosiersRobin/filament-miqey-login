@@ -13,6 +13,14 @@ class WebhookController
 {
     public function __invoke(Request $request): JsonResponse
     {
+        $signature = $request->header('Signature');
+
+        $calculatedSignature = hash_hmac('sha256', $request->getContent(), config('miqey-login.webhook_secret'));
+
+        if (! hash_equals($signature, $calculatedSignature)) {
+            return response()->json(status: 401);
+        }
+
         $phone = $request->get('phone');
         $code = $request->get('code');
 
