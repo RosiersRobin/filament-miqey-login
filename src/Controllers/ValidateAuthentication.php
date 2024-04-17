@@ -20,8 +20,8 @@ class ValidateAuthentication
 
         $phoneNumber = Cache::pull($request->get('token'));
 
-        // todo: make the user model dynamic using the plugin
-        $user = \App\Models\User::query()
+        $userClass = config('miqey-login.user_model', \App\Models\User::class);
+        $user = $userClass::query()
             ->where('phone_number', '=', $phoneNumber)
             ->first();
 
