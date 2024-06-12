@@ -79,7 +79,7 @@ class SmsLogin extends BaseAuth
         $method = $agent->isDesktop() ? 'qr' : 'sms';
 
         $response = Http::post('https://secureid.digitalhq.com/api/generate', [
-            'api_key' => config('secure-id.api_key'),
+            'api_key' => config('miqey.api_key'),
             'type' => $method,
         ]);
 
