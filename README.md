@@ -41,7 +41,12 @@ public function panel(Panel $panel): Panel
     }
 ```
 
-Add an .env key called `SECURE_ID_API_KEY=` with the key given by MiQey.
+Add the following keys to your .env:
+
+```
+MIQEY_API_KEY=
+MIQEY_WEBHOOK_SECRET=
+```
 
 Make sure you have pusher setup and working.
 

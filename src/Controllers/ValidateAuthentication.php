@@ -20,9 +20,9 @@ class ValidateAuthentication
 
         $phoneNumber = Cache::pull($request->get('token'));
 
-        $userClass = config('miqey-login.user_model', \App\Models\User::class);
+        $userClass = config('miqey.user_model');
         $user = $userClass::query()
-            ->where('phone_number', '=', $phoneNumber)
+            ->where(config('miqey.user_phone_column', 'phone_number'), '=', $phoneNumber)
             ->first();
 
         if (is_null($user)) {
@@ -32,6 +32,6 @@ class ValidateAuthentication
 
         Filament::auth()->login($user, true);
 
-        return redirect()->to(Filament::getCurrentPanel()?->getPath());
+        return redirect()->to(Filament::getCurrentPanel()?->getPath() ?? $request->get('redirect_to', '/'));
     }
 }

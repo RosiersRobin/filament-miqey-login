@@ -6,7 +6,7 @@ use Filament\Facades\Filament;
 use Filament\Pages\Auth\Login as BaseAuth;
 use Illuminate\Support\Facades\Http;
 use Jenssegers\Agent\Agent;
-use Libaro\SecureId\Services\SignAgentService;
+use Libaro\MiQey\Services\SignAgentService;
 
 class SmsLogin extends BaseAuth
 {

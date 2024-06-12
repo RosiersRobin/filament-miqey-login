@@ -36,12 +36,11 @@
         const subChannel = 'signRequest_{{ $this->getChannelCode() }}';
         const authEndpoint = '{{ route('miqey.auth.sms') }}';
 
-        // todo: move this to the js files
-        var pusher = new Pusher(pusherKey, {
+        let pusher = new Pusher(pusherKey, {
             cluster: 'eu'
         });
 
-        var channel = pusher.subscribe(subChannel);
+        let channel = pusher.subscribe(subChannel);
         channel.bind('sign-request-received', function (data) {
             window.location.href = authEndpoint + '?token=' + data.token
         });
