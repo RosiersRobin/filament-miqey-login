@@ -59,7 +59,6 @@ class FilamentMiqeyLoginServiceProvider extends PackageServiceProvider
 
         $package->hasRoutes([
             'web',
-            'webhook',
         ]);
     }
 
