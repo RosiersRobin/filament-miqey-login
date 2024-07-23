@@ -2,6 +2,4 @@
 
 namespace RosiersRobin\FilamentMiqeyLogin;
 
-class FilamentMiqeyLogin
-{
-}
+class FilamentMiqeyLogin {}

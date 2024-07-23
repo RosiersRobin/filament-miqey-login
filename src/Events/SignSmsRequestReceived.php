@@ -17,8 +17,7 @@ class SignSmsRequestReceived implements ShouldBroadcastNow
     public function __construct(
         public string $code,
         public string $token
-    ) {
-    }
+    ) {}
 
     /**
      * Get the channels the event should broadcast on.
