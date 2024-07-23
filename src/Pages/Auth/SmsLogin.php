@@ -4,7 +4,6 @@ namespace RosiersRobin\FilamentMiqeyLogin\Pages\Auth;
 
 use Filament\Facades\Filament;
 use Filament\Pages\Auth\Login as BaseAuth;
-use Illuminate\Support\Facades\Http;
 use Jenssegers\Agent\Agent;
 use Libaro\MiQey\Services\SignAgentService;
 
@@ -31,9 +30,9 @@ class SmsLogin extends BaseAuth
         $signService = new SignAgentService();
 
         try {
-            $signService->getSign();
+            $sign = $signService->getSign();
             // render the things for the views
-            $this->setSignDataForView();
+            $this->setSignDataForView($sign);
 
         } catch (\Throwable $exception) {
             $this->useDefaultLogin = true;
@@ -73,28 +72,12 @@ class SmsLogin extends BaseAuth
     /**
      * @throws \JsonException
      */
-    private function setSignDataForView(): void
+    private function setSignDataForView(array $data): void
     {
-        $agent = new Agent();
-        $method = $agent->isDesktop() ? 'qr' : 'sms';
-
-        $response = Http::post('https://secureid.digitalhq.com/api/generate', [
-            'api_key' => config('miqey.api_key'),
-            'type' => $method,
-        ]);
-
-        $bodyString = $response->getBody()->getContents();
-
-        if (! json_validate($bodyString)) {
-            throw new \Exception('Not a valid json');
-        }
-
-        $decoded = json_decode($bodyString, true, 512, JSON_THROW_ON_ERROR);
-
         // set the params
-        $this->qrCodeData = data_get($decoded, 'qr');
-        $this->androidSmsUrl = data_get($decoded, 'android');
-        $this->iosSmsLogin = data_get($decoded, 'ios');
-        $this->channelCode = data_get($decoded, 'code');
+        $this->qrCodeData = data_get($data, 'data');
+        $this->androidSmsUrl = data_get($data, 'data');
+        $this->iosSmsLogin = data_get($data, 'data');
+        $this->channelCode = data_get($data, 'code');
     }
 }
