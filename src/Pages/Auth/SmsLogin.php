@@ -20,6 +20,7 @@ class SmsLogin extends BaseAuth
     private string $iosSmsLogin = '';
 
     private string $channelCode = '';
+
     private string $mobileLoginUrl = '';
 
     public function mount(): void
@@ -28,7 +29,7 @@ class SmsLogin extends BaseAuth
             redirect()->intended(Filament::getUrl());
         }
 
-        $signService = new SignAgentService();
+        $signService = new SignAgentService;
 
         try {
             $sign = $signService->getSign();
@@ -72,7 +73,7 @@ class SmsLogin extends BaseAuth
 
     public function getBrowserAgent(): Agent
     {
-        return new Agent();
+        return new Agent;
     }
 
     /**

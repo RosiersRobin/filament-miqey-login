@@ -90,7 +90,7 @@ class FilamentMiqeyLoginServiceProvider extends PackageServiceProvider
         }
 
         // Testing
-        Testable::mixin(new TestsFilamentMiqeyLogin());
+        Testable::mixin(new TestsFilamentMiqeyLogin);
     }
 
     protected function getAssetPackageName(): ?string
