@@ -15,16 +15,12 @@
             @if ($this->getBrowserAgent()->isDesktop())
                 {!! $this->getLoginQr() !!}
             @else
-                @if($this->getBrowserAgent()->isAndroidOS())
-                    <x-filament::button icon="heroicon-m-shield-check" class="w-full" tag="a" href="{{ $this->getAndroidLoginUrl() }}">Sign in</x-filament::button>
-                @else
-                    <x-filament::button icon="heroicon-m-shield-check" class="w-full" tag="a" href="{{ $this->getIosLoginUrl() }}">Sign in</x-filament::button>
-                @endif
+                <x-filament::button icon="heroicon-m-shield-check" class="w-full" tag="a" href="{{ $this->getMobileLoginUrl() }}">Sign in</x-filament::button>
             @endif
         </div>
 
         <span class="flex justify-center">
-            <small>powered by <a href="https://miqey.com" target="_blank">MiQey</a></small>
+            <small>Powered by <a href="https://miqey.com" target="_blank">miQey</a></small>
         </span>
 
     @endif

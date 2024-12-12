@@ -20,6 +20,7 @@ class SmsLogin extends BaseAuth
     private string $iosSmsLogin = '';
 
     private string $channelCode = '';
+    private string $mobileLoginUrl = '';
 
     public function mount(): void
     {
@@ -64,6 +65,11 @@ class SmsLogin extends BaseAuth
         return $this->channelCode;
     }
 
+    public function getMobileLoginUrl(): string
+    {
+        return $this->mobileLoginUrl;
+    }
+
     public function getBrowserAgent(): Agent
     {
         return new Agent();
@@ -79,5 +85,6 @@ class SmsLogin extends BaseAuth
         $this->androidSmsUrl = data_get($data, 'data');
         $this->iosSmsLogin = data_get($data, 'data');
         $this->channelCode = data_get($data, 'code');
+        $this->mobileLoginUrl = 'https://app.miqey.com/login/' . data_get($data, 'code');
     }
 }
