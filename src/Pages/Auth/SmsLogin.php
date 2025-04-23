@@ -2,10 +2,10 @@
 
 namespace RosiersRobin\FilamentMiqeyLogin\Pages\Auth;
 
+use DigitalHQ\MiQey\Services\SignAgentService;
 use Filament\Facades\Filament;
 use Filament\Pages\Auth\Login as BaseAuth;
 use Jenssegers\Agent\Agent;
-use DigitalHQ\MiQey\Services\SignAgentService;
 
 class SmsLogin extends BaseAuth
 {
